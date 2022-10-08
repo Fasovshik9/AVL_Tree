@@ -45,16 +45,23 @@ namespace AVLTree
             {
                 DrawHelpers.AddNode(itam.ToString(), Tree, radius);
             }
+
+            
+
             //Добавим в объект каждое ребро из списка смежности
             foreach (var item in massAVL)
             {
                 Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[1].ToString())));
+                draw(Tree);
                 Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[2].ToString())));
+                draw(Tree);
             }
-            drawPerSeconds(Tree);
+            
+            
+
             return Tree;
         }
-        private void drawPerSeconds(GeometryGraph tree)
+        private void draw(GeometryGraph tree)
         {
             //Зададим основные настройки макета
             var settings = new SugiyamaLayoutSettings
@@ -67,8 +74,9 @@ namespace AVLTree
             //Создадим макет с заданными настройками из данных объекта
             var layout = new LayeredLayout(tree, settings);
             layout.Run();
-            panelDrawTree.Refresh();
+            AVLTree = tree;
             System.Threading.Thread.Sleep(100);
+            panelDrawTree.Refresh();
         }
 
 
