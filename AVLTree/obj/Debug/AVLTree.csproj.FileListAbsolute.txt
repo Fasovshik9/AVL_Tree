@@ -1,0 +1,14 @@
+D:\DiskE\coding\c#\AVLTree\bin\Debug\AVLTree.exe.config
+D:\DiskE\coding\c#\AVLTree\bin\Debug\AVLTree.exe
+D:\DiskE\coding\c#\AVLTree\bin\Debug\AVLTree.pdb
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.AssemblyReference.cache
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.SuggestedBindingRedirects.cache
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.Properties.Resources.resources
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.GenerateResource.cache
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.CoreCompileInputs.cache
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.exe
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.pdb
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.MainForm.resources
+D:\DiskE\coding\c#\AVLTree\bin\Debug\Microsoft.Msagl.dll
+D:\DiskE\coding\c#\AVLTree\bin\Debug\Microsoft.Msagl.xml
+D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.CopyComplete

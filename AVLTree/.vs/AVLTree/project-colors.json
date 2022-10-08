@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "ed4fc0ef-10d1-48df-b2d1-d0896e544977": {
+      "ProjectGuid": "ed4fc0ef-10d1-48df-b2d1-d0896e544977",
+      "DisplayName": "AVLTree",
+      "ColorIndex": 0
+    },
+    "7c2d4dc7-aae2-4d19-8330-e72fb7743459": {
+      "ProjectGuid": "7c2d4dc7-aae2-4d19-8330-e72fb7743459",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
