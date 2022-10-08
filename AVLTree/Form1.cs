@@ -13,8 +13,8 @@ namespace AVLTree
     public partial class MainForm : Form
     {
         //Определим объект, который будет хранить данные для графического представления дерева
-        private GeometryGraph gGraph;
-        private int[] massAVL = {1,2,3};
+        private GeometryGraph AVLTree;
+        private int[] massAVL = { 1, 2, 3 };
         public MainForm()
         {
             InitializeComponent();
@@ -22,13 +22,13 @@ namespace AVLTree
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
-            
-            var numberNode = textBoxAddNode.Text;
-            gGraph = null;
+            //Подготовим данные перед вызовом формы заполнения матрицы смежности
+            var size = textBoxAddNode.Text;
+            AVLTree = null;
             //Очистим панель с графическим представлением дерева
             panelDrawTree.CreateGraphics();
             //Вызовем вспомогательную функцию для графического представления дерева
-            gGraph = CreateAndLayoutGraph();
+            AVLTree = CreateAndLayoutGraph();
             textBoxAddNode.Text = "";
             //Перерисуем панель, где отображается дерево
             panelDrawTree.Refresh();
@@ -37,21 +37,25 @@ namespace AVLTree
         private GeometryGraph CreateAndLayoutGraph()
         {
             //Инициализируем объект, хранящий данные для графического представления дерева
-            GeometryGraph graph = new GeometryGraph();
+            GeometryGraph Tree = new GeometryGraph();
             //Установим радиус вершин
             double radius = 10;
             //Добавим в объект каждую вершину из списка смежности
             foreach (var itam in massAVL)
             {
-                DrawHelpers.AddNode(itam.ToString(), graph, radius);
+                DrawHelpers.AddNode(itam.ToString(), Tree, radius);
             }
-
             //Добавим в объект каждое ребро из списка смежности
-            //foreach (var item in massAVL)
-            //{
-            //    graph.Edges.Add(new Edge(graph.FindNodeByUserData(massAVL[0].ToString()), graph.FindNodeByUserData(massAVL[1].ToString())));
-            //    graph.Edges.Add(new Edge(graph.FindNodeByUserData(massAVL[0].ToString()), graph.FindNodeByUserData(massAVL[2].ToString())));
-            //}
+            foreach (var item in massAVL)
+            {
+                Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[1].ToString())));
+                Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[2].ToString())));
+            }
+            drawPerSeconds(Tree);
+            return Tree;
+        }
+        private void drawPerSeconds(GeometryGraph tree)
+        {
             //Зададим основные настройки макета
             var settings = new SugiyamaLayoutSettings
             {
@@ -61,11 +65,13 @@ namespace AVLTree
                 EdgeRoutingSettings = { EdgeRoutingMode = EdgeRoutingMode.StraightLine }
             };
             //Создадим макет с заданными настройками из данных объекта
-            var layout = new LayeredLayout(graph, settings);
+            var layout = new LayeredLayout(tree, settings);
             layout.Run();
-
-            return graph;
+            panelDrawTree.Refresh();
+            System.Threading.Thread.Sleep(100);
         }
+
+
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -74,7 +80,7 @@ namespace AVLTree
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
         {
             //При каждой отрисовке панели также отобразим на ней дерево
-            if (gGraph != null) DrawHelpers.DrawFromGraph(panelDrawTree.ClientRectangle, gGraph, e.Graphics);
+            if (AVLTree != null) DrawHelpers.DrawFromGraph(panelDrawTree.ClientRectangle, AVLTree, e.Graphics);
         }
 
         private void panelDrawTree_SizeChanged(object sender, EventArgs e)
