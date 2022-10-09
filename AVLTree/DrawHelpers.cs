@@ -9,17 +9,17 @@ namespace AVLTree
 {
     class DrawHelpers
     {
-        //Отрисовка графа в пределах размеров области clientRectangle элемента управления
+        //Отрисовка дерева в пределах размеров области clientRectangle элемента управления
         //на основе данных из объекта geometryGraph MSAGL на поверхности рисования graphics элемента управления
         public static void DrawFromGraph(Rectangle clientRectangle, GeometryGraph geometryGraph, Graphics graphics)
         {
-            //Подготовка трансформации графа под область для отрисовки
+            //Подготовка трансформации дерева под область для отрисовки
             SetGraphTransform(geometryGraph, clientRectangle, graphics);
             //Инициализируем инструмент рисования
             var pen = new Pen(Brushes.Black);
-            //Нарисуем вершины графа
+            //Нарисуем вершины дерева
             DrawNodes(geometryGraph, pen, graphics);
-            //Нарисуем рёбра графа
+            //Нарисуем рёбра дерева
             DrawEdges(geometryGraph, pen, graphics);
         }
 
