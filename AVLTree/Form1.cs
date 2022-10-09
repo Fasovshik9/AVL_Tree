@@ -27,17 +27,17 @@ namespace AVLTree
         public MainForm()
         {
             InitializeComponent();
-            ClassAVLTree.Add(4);
-            ClassAVLTree.Add(5);
+            ClassAVLTree.Add(1);
             ClassAVLTree.Add(2);
             ClassAVLTree.Add(3);
-            ClassAVLTree.Add(1);
+            ClassAVLTree.Add(4);
+            ClassAVLTree.Add(5);
             ClassAVLTree.DisplayTree();
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
-
+            Tree.Edges.Clear();
             if (textBoxAddNode.Text != "")
             {
                 ClassAVLTree.Add(int.Parse(textBoxAddNode.Text));
@@ -51,6 +51,7 @@ namespace AVLTree
             textBoxAddNode.Text = "";
             //Перерисуем панель, где отображается дерево
             panelDrawTree.Refresh();
+            
         }
         //Вспомогательная функция создания макета и наполнения данных для графического представления дерева
         private GeometryGraph CreateAndLayoutGraph()
