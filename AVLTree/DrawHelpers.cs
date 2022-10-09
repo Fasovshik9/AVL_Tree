@@ -134,6 +134,10 @@ namespace AVLTree
             if (graph.FindNodeByUserData(id) == null)
                 graph.Nodes.Add(new Node(CreateCurve(radius), id));
         }
+        public static void ClearNode(GeometryGraph graph)
+        {          
+            graph.Nodes.Clear();
+        }
 
         public static ICurve CreateCurve(double radius)
         {

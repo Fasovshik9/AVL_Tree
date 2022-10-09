@@ -37,6 +37,7 @@ namespace AVLTree
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
+            DrawHelpers.ClearNode(Tree);
             Tree.Edges.Clear();
             if (textBoxAddNode.Text != "")
             {
@@ -96,7 +97,21 @@ namespace AVLTree
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Tree.Edges.Clear();
+            DrawHelpers.ClearNode(Tree);
+            if (textBoxDeleteNode.Text != "")
+            {
+                ClassAVLTree.Delete(int.Parse(textBoxDeleteNode.Text));
+            }
+            ClassAVLTree.DisplayTree();
+            AVLTree = null;
+            //Очистим панель с графическим представлением дерева
+            panelDrawTree.CreateGraphics();
+            //Вызовем вспомогательную функцию для графического представления дерева
+            AVLTree = CreateAndLayoutGraph();
+            textBoxDeleteNode.Text = "";
+            //Перерисуем панель, где отображается дерево
+            panelDrawTree.Refresh();
         }
 
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
@@ -337,17 +352,7 @@ namespace AVLTree
                 {
                     InOrderDisplayTree(current.left);
                     InOrderDisplayTree(current.right);
-
                     Console.Write("({0}) ", current.data);
-                    //if ((current.left != null) && (current != null))
-                    //{
-                    //    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
-                    //}
-                    //if ((current.right != null) && (current != null))
-                    //{
-                    //    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.data.ToString()), Tree.FindNodeByUserData(current.right.data.ToString())));
-                    //}
-
                     DrawHelpers.AddNode(current.data.ToString(), Tree, radius);
                 }
             }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.buttonAddNode = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonDeleteNode = new System.Windows.Forms.Button();
             this.textBoxAddNode = new System.Windows.Forms.TextBox();
             this.textBoxDeleteNode = new System.Windows.Forms.TextBox();
             this.panelDrawTree = new System.Windows.Forms.Panel();
@@ -45,15 +45,15 @@
             this.buttonAddNode.UseVisualStyleBackColor = true;
             this.buttonAddNode.Click += new System.EventHandler(this.buttonAddNode_Click);
             // 
-            // button2
+            // buttonDeleteNode
             // 
-            this.button2.Location = new System.Drawing.Point(326, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Delete Node";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDeleteNode.Location = new System.Drawing.Point(326, 41);
+            this.buttonDeleteNode.Name = "buttonDeleteNode";
+            this.buttonDeleteNode.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteNode.TabIndex = 1;
+            this.buttonDeleteNode.Text = "Delete Node";
+            this.buttonDeleteNode.UseVisualStyleBackColor = true;
+            this.buttonDeleteNode.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBoxAddNode
             // 
@@ -90,7 +90,7 @@
             this.Controls.Add(this.panelDrawTree);
             this.Controls.Add(this.textBoxDeleteNode);
             this.Controls.Add(this.textBoxAddNode);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonDeleteNode);
             this.Controls.Add(this.buttonAddNode);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -102,7 +102,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonAddNode;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonDeleteNode;
         private System.Windows.Forms.TextBox textBoxAddNode;
         private System.Windows.Forms.TextBox textBoxDeleteNode;
         private System.Windows.Forms.Panel panelDrawTree;
