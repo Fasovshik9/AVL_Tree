@@ -12,3 +12,17 @@ D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.MainForm.resources
 D:\DiskE\coding\c#\AVLTree\bin\Debug\Microsoft.Msagl.dll
 D:\DiskE\coding\c#\AVLTree\bin\Debug\Microsoft.Msagl.xml
 D:\DiskE\coding\c#\AVLTree\obj\Debug\AVLTree.csproj.CopyComplete
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\bin\Debug\AVLTree.exe.config
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\bin\Debug\AVLTree.exe
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\bin\Debug\AVLTree.pdb
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\bin\Debug\Microsoft.Msagl.dll
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\bin\Debug\Microsoft.Msagl.xml
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.AssemblyReference.cache
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.SuggestedBindingRedirects.cache
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.MainForm.resources
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.Properties.Resources.resources
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.GenerateResource.cache
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.CoreCompileInputs.cache
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.CopyComplete
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.exe
+D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.pdb

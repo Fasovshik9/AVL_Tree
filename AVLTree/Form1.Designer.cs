@@ -105,7 +105,7 @@
         private System.Windows.Forms.Button buttonDeleteNode;
         private System.Windows.Forms.TextBox textBoxAddNode;
         private System.Windows.Forms.TextBox textBoxDeleteNode;
-        private System.Windows.Forms.Panel panelDrawTree;
+        public System.Windows.Forms.Panel panelDrawTree;
     }
 }
 

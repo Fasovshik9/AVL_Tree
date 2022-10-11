@@ -3,86 +3,73 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Msagl.Core.Geometry;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using Microsoft.Msagl.Core.Layout;
 using Microsoft.Msagl.Core.Routing;
 using Microsoft.Msagl.Layout.Layered;
+using static AVLTree.MainForm.AVL;
 
 namespace AVLTree
 {
     public partial class MainForm : Form
     {
         //Определим объект, который будет хранить данные для графического представления дерева
-        private GeometryGraph AVLTree;
-        private List<int> massAVL = new List<int>() { 1, 2, 3 };
+        static public GeometryGraph AVLTree;
+        //private List<int> massAVL = new List<int>() { 1, 2, 3 };
         //public List<int> massAVL = new List<int>();
         static private AVL ClassAVLTree = new AVL();
+        static private AVL ClassAVLTreeFotCheck = new AVL();
 
+        static Panel PanelRef = new Panel();
 
 
         //Инициализируем объект, хранящий данные для графического представления дерева
-        static private GeometryGraph Tree = new GeometryGraph();
+        static public GeometryGraph Tree = new GeometryGraph();
         static private double radius = 10;
 
         public MainForm()
         {
             InitializeComponent();
-            ClassAVLTree.Add(1);
-            ClassAVLTree.Add(2);
-            ClassAVLTree.Add(3);
-            ClassAVLTree.Add(4);
+            ClassAVLTree.Add(7);
             ClassAVLTree.Add(5);
-            ClassAVLTree.DisplayTree();
+            ClassAVLTree.Add(9);
+            ClassAVLTree.Add(10);
+            PanelRef = panelDrawTree;
+            
+            DisplayTreeDraw();
+            
+
+            AVLTree = CreateAndLayoutGraph(Tree);
+            //panelDrawTree.CreateGraphics();
+            //panelDrawTree.Refresh();
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
-            DrawHelpers.ClearNode(Tree);
+            //DrawHelpers.ClearNode(Tree);
             Tree.Edges.Clear();
+            Tree.Nodes.Clear();
+
             if (textBoxAddNode.Text != "")
             {
                 ClassAVLTree.Add(int.Parse(textBoxAddNode.Text));
             }
-            ClassAVLTree.DisplayTree();
+            DisplayTreeDraw();
+            //DrawRoot11(ClassAVLTree.root);
             AVLTree = null;
             //Очистим панель с графическим представлением дерева
             panelDrawTree.CreateGraphics();
             //Вызовем вспомогательную функцию для графического представления дерева
-            AVLTree = CreateAndLayoutGraph();
-            textBoxAddNode.Text = "";
-            //Перерисуем панель, где отображается дерево
-            panelDrawTree.Refresh();
-            
+            AVLTree = CreateAndLayoutGraph(Tree);
+            textBoxAddNode.Text = "";   
         }
         //Вспомогательная функция создания макета и наполнения данных для графического представления дерева
-        private GeometryGraph CreateAndLayoutGraph()
-        {
-
-            //Установим радиус вершин
-
-            //Добавим в объект каждую вершину из списка смежности
-            //foreach (var itam in massAVL)
-            {
-                //DrawHelpers.AddNode(itam.ToString(), Tree, radius);
-            }
-            //Добавим в объект каждое ребро из списка смежности
-            //foreach (var item in massAVL)
-            //{
-            //    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[1].ToString())));
-            //    draw(Tree);
-            //    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(massAVL[0].ToString()), Tree.FindNodeByUserData(massAVL[2].ToString())));
-            //    draw(Tree);
-            //}
-            draw(Tree);
-            return Tree;
-        }
-        private void draw(GeometryGraph tree)
+        public GeometryGraph CreateAndLayoutGraph(GeometryGraph tree)
         {
             //Зададим основные настройки макета
             var settings = new SugiyamaLayoutSettings
             {
-                //Повернём макет на 180 градусов, чтобы дерево строилось сверху вниз
-                //Transformation = PlaneTransformation.Rotation(Math.PI),
                 //Установим стиль отображения рёбер
                 EdgeRoutingSettings = { EdgeRoutingMode = EdgeRoutingMode.StraightLine }
             };
@@ -90,8 +77,75 @@ namespace AVLTree
             var layout = new LayeredLayout(tree, settings);
             layout.Run();
             AVLTree = tree;
-            System.Threading.Thread.Sleep(100);
+            
+            //Перерисуем панель, где отображается дерево
             panelDrawTree.Refresh();
+            return Tree;
+        }
+        private void DrawRoot11(NodeTree current)
+        {
+            if (current != null)
+            {
+                if (current.left != null)
+                {
+                    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
+                }
+            }
+            AVLTree = CreateAndLayoutGraph(Tree);
+        }
+        private void DisplayTreeDraw()
+        {
+            if (ClassAVLTree.root == null)
+            {
+                Console.WriteLine("Tree is empty");
+                return;
+            }
+            DrawNode(ClassAVLTree.root);
+            DrawNodeConnections(ClassAVLTree.root);
+        }
+        private void DrawNode(NodeTree current)
+        {
+            if (current != null)
+            {
+                DrawNode(current.right);
+                DrawNode(current.left);
+                Console.Write("({0}) ", current.data);
+                DrawHelpers.AddNode(current.data.ToString(), Tree, radius);
+            }
+        }
+        private void DrawNodeConnections(NodeTree current)
+        {
+            if (current != null)
+            {
+                //System.Threading.Thread.Sleep(1);
+                //AVLTree = CreateAndLayoutGraph(Tree);
+                DrawNodeConnections(current.left);
+                DrawNodeConnections(current.right);
+                if (current.left != null)
+                {
+                    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
+                }
+
+            }
+            if (current != null)
+            {
+                DrawNodeConnections(current.left);
+                DrawNodeConnections(current.right);
+                if (current.right != null)
+                {
+                    Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.right.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
+                }
+
+            }
+        }
+
+        private void DrawRoot(NodeTree current)
+        {
+            if (current.left != null)
+            {
+                Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
+            }
+
         }
 
 
@@ -103,12 +157,12 @@ namespace AVLTree
             {
                 ClassAVLTree.Delete(int.Parse(textBoxDeleteNode.Text));
             }
-            ClassAVLTree.DisplayTree();
+            //ClassAVLTree.DisplayTree();
             AVLTree = null;
             //Очистим панель с графическим представлением дерева
             panelDrawTree.CreateGraphics();
             //Вызовем вспомогательную функцию для графического представления дерева
-            AVLTree = CreateAndLayoutGraph();
+            AVLTree = CreateAndLayoutGraph(Tree);
             textBoxDeleteNode.Text = "";
             //Перерисуем панель, где отображается дерево
             panelDrawTree.Refresh();
@@ -126,27 +180,29 @@ namespace AVLTree
             panelDrawTree.Invalidate();
         }
 
-        ////////////////////////////////////////////////////
-        ///
-        class AVL
+        ///////////////////////////////////////////////////////
+
+        public class AVL
         {
-            class Node
+            public class NodeTree
             {
                 public int data;
-                public Node left;
-                public Node right;
-                public Node(int data)
+                public NodeTree left;
+                public NodeTree right;
+                public NodeTree(int data)
                 {
                     this.data = data;
                 }
             }
-            Node root;
+            public NodeTree root;
+            
+
             public AVL()
             {
             }
             public void Add(int data)
             {
-                Node newItem = new Node(data);
+                NodeTree newItem = new NodeTree(data);
                 if (root == null)
                 {
                     root = newItem;
@@ -156,7 +212,7 @@ namespace AVLTree
                     root = RecursiveInsert(root, newItem);
                 }
             }
-            private Node RecursiveInsert(Node current, Node n)
+            private NodeTree RecursiveInsert(NodeTree current, NodeTree n)
             {
                 if (current == null)
                 {
@@ -175,7 +231,7 @@ namespace AVLTree
                 }
                 return current;
             }
-            private Node balance_tree(Node current)
+            private NodeTree balance_tree(NodeTree current)
             {
                 int b_factor = balance_factor(current);
                 if (b_factor > 1)
@@ -197,6 +253,7 @@ namespace AVLTree
                     }
                     else
                     {
+
                         current = RotateRR(current);
                     }
                 }
@@ -206,9 +263,9 @@ namespace AVLTree
             {//and here
                 root = Delete(root, target);
             }
-            private Node Delete(Node current, int target)
+            private NodeTree Delete(NodeTree current, int target)
             {
-                Node parent;
+                NodeTree parent;
                 if (current == null)
                 { return null; }
                 else
@@ -286,7 +343,7 @@ namespace AVLTree
                     Console.WriteLine("Nothing found!");
                 }
             }
-            private Node Find(int target, Node current)
+            private NodeTree Find(int target, NodeTree current)
             {
 
                 if (target < current.data)
@@ -309,58 +366,11 @@ namespace AVLTree
                 }
 
             }
-            public void DisplayTree()
-            {
-                if (root == null)
-                {
-                    Console.WriteLine("Tree is empty");
-                    return;
-                }
-                InOrderDisplayTree(root);
-                DisplayTree1(root);
-                DisplayTree2(root);
-                Console.WriteLine();
-            }
-            private void DisplayTree1(Node current)
-            {
-                if (current != null)
-                {
-                    DisplayTree1(current.left);
-                    DisplayTree1(current.right);
-                    if (current.left != null)
-                    {
-                        Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
-                    }
-                }
-            }
-            private void DisplayTree2(Node current)
-            {
-                if (current != null)
-                {
-                    DisplayTree2(current.left);
-                    DisplayTree2(current.right);
-                    if (current.right != null)
-                    {
-                        Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.right.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
-                    }
-                    
-                }
-            }
-            private void InOrderDisplayTree(Node current)
-            {
-                if (current != null)
-                {
-                    InOrderDisplayTree(current.left);
-                    InOrderDisplayTree(current.right);
-                    Console.Write("({0}) ", current.data);
-                    DrawHelpers.AddNode(current.data.ToString(), Tree, radius);
-                }
-            }
             private int max(int l, int r)
             {
                 return l > r ? l : r;
             }
-            private int getHeight(Node current)
+            private int getHeight(NodeTree current)
             {
                 int height = 0;
                 if (current != null)
@@ -372,36 +382,45 @@ namespace AVLTree
                 }
                 return height;
             }
-            private int balance_factor(Node current)
+            private int balance_factor(NodeTree current)
             {
                 int l = getHeight(current.left);
                 int r = getHeight(current.right);
                 int b_factor = l - r;
                 return b_factor;
             }
-            private Node RotateRR(Node parent)
+            private NodeTree RotateRR(NodeTree parent)
             {
-                Node pivot = parent.right;
+                
+                NodeTree pivot = parent.right;
                 parent.right = pivot.left;
                 pivot.left = parent;
+                Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(parent.data.ToString()), Tree.FindNodeByUserData(pivot.data.ToString())));
+                //Перерисуем панель, где отображается дерево
+                System.Threading.Thread.Sleep(1000);
+                PanelRef.Refresh();
+                ///////////////////////////////////////////
                 return pivot;
             }
-            private Node RotateLL(Node parent)
+            private NodeTree RotateLL(NodeTree parent)
             {
-                Node pivot = parent.left;
+
+                NodeTree pivot = parent.left;
                 parent.left = pivot.right;
                 pivot.right = parent;
                 return pivot;
             }
-            private Node RotateLR(Node parent)
+            private NodeTree RotateLR(NodeTree parent)
             {
-                Node pivot = parent.left;
+
+                NodeTree pivot = parent.left;
                 parent.left = RotateRR(pivot);
                 return RotateLL(parent);
             }
-            private Node RotateRL(Node parent)
+            private NodeTree RotateRL(NodeTree parent)
             {
-                Node pivot = parent.right;
+
+                NodeTree pivot = parent.right;
                 parent.right = RotateLL(pivot);
                 return RotateRR(parent);
             }

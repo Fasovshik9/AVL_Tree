@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using Microsoft.Msagl.Core.Layout;
 using Point = Microsoft.Msagl.Core.Geometry.Point;
 
 namespace AVLTree
 {
-    class DrawHelpers
+    class DrawHelpers : MainForm
     {
         //Отрисовка дерева в пределах размеров области clientRectangle элемента управления
         //на основе данных из объекта geometryGraph MSAGL на поверхности рисования graphics элемента управления
@@ -131,6 +132,7 @@ namespace AVLTree
 
         public static void AddNode(string id, GeometryGraph graph, double radius)
         {
+            //graph.Nodes.Remove(graph.FindNodeByUserData(id));
             if (graph.FindNodeByUserData(id) == null)
                 graph.Nodes.Add(new Node(CreateCurve(radius), id));
         }
@@ -138,7 +140,10 @@ namespace AVLTree
         {          
             graph.Nodes.Clear();
         }
-
+        public static void RemoveNode(GeometryGraph graph, int index)
+        {
+            graph.Nodes.RemoveAt(index);
+        }
         public static ICurve CreateCurve(double radius)
         {
             return CurveFactory.CreateCircle(radius, new Point());
