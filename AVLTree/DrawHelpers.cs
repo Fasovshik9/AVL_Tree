@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using Microsoft.Msagl.Core.Layout;
 using Point = Microsoft.Msagl.Core.Geometry.Point;
 
 namespace AVLTree
 {
-    class DrawHelpers : MainForm
+    class DrawHelpers
     {
-        //Отрисовка дерева в пределах размеров области clientRectangle элемента управления
+        //Отрисовка графа в пределах размеров области clientRectangle элемента управления
         //на основе данных из объекта geometryGraph MSAGL на поверхности рисования graphics элемента управления
         public static void DrawFromGraph(Rectangle clientRectangle, GeometryGraph geometryGraph, Graphics graphics)
         {
-            //Подготовка трансформации дерева под область для отрисовки
+            //Подготовка трансформации графа под область для отрисовки
             SetGraphTransform(geometryGraph, clientRectangle, graphics);
             //Инициализируем инструмент рисования
             var pen = new Pen(Brushes.Black);
-            //Нарисуем вершины дерева
+            //Нарисуем вершины графа
             DrawNodes(geometryGraph, pen, graphics);
-            //Нарисуем рёбра дерева
+            //Нарисуем рёбра графа
             DrawEdges(geometryGraph, pen, graphics);
         }
 
@@ -63,7 +62,7 @@ namespace AVLTree
             {
                 graphics.DrawEllipse(pen, new RectangleF((float)el.BoundingBox.Left, (float)el.BoundingBox.Bottom,
                     (float)el.BoundingBox.Width, (float)el.BoundingBox.Height));
-                graphics.DrawString(n.UserData.ToString(), new Font(FontFamily.GenericSansSerif, (float)9), Brushes.Black, new PointF((float)(el.Center.X - 2 - el.BoundingBox.Width / 4), (float)(el.Center.Y - el.BoundingBox.Height / 3)));
+                graphics.DrawString(n.UserData.ToString(), new Font(FontFamily.GenericSansSerif, (float)6), Brushes.Black, new PointF((float)(el.Center.X - 2 - el.BoundingBox.Width / 6), (float)(el.Center.Y - el.BoundingBox.Height / 6)));
             }
             else
                 graphics.DrawPath(pen, CreateGraphicsPath(curve));
@@ -132,18 +131,10 @@ namespace AVLTree
 
         public static void AddNode(string id, GeometryGraph graph, double radius)
         {
-            //graph.Nodes.Remove(graph.FindNodeByUserData(id));
             if (graph.FindNodeByUserData(id) == null)
                 graph.Nodes.Add(new Node(CreateCurve(radius), id));
         }
-        public static void ClearNode(GeometryGraph graph)
-        {          
-            graph.Nodes.Clear();
-        }
-        public static void RemoveNode(GeometryGraph graph, int index)
-        {
-            graph.Nodes.RemoveAt(index);
-        }
+
         public static ICurve CreateCurve(double radius)
         {
             return CurveFactory.CreateCircle(radius, new Point());
