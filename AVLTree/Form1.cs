@@ -15,6 +15,7 @@ namespace AVLTree
 {
     public partial class MainForm : Form
     {
+        static public int[] aaraytestCase = new int[] { 1, 2, 3, 5 };
         static private double radius = 10;
         static public int speedDraw = 10;
 
@@ -50,23 +51,12 @@ namespace AVLTree
             //}
 
             InitializeComponent();
-            Add(5, ClassAVLTree1);
-            Add(1, ClassAVLTree1);
-            Add(8, ClassAVLTree1);
-            Add(6, ClassAVLTree1);
-            Add(10, ClassAVLTree1);
-
             
-            Add(1, ClassAVLTree4);
-            Add(2, ClassAVLTree4);
-            Add(3, ClassAVLTree4);
+            Add(50, ClassAVLTree4);
             //ClassAVLTree2 = ClassAVLTree1;
             //ClassAVLTree3 = ClassAVLTree1;
             //ClassAVLTree4 = ClassAVLTree1;
 
-            ConnectTreeAndDraw(ClassAVLTree1, Tree1);
-            ConnectTreeAndDraw(ClassAVLTree2, Tree2);
-            ConnectTreeAndDraw(ClassAVLTree3, Tree3);
             ConnectTreeAndDraw(ClassAVLTree4, Tree4);
         }
 
@@ -110,36 +100,6 @@ namespace AVLTree
             //Перерисуем панель, где отображается дерево
             //panel.Refresh();
         }
-
-        //Вспомогательная функция создания макета и наполнения данных для графического представления дерева
-        //public GeometryGraph CreateAndLayoutGraph(GeometryGraph Tree, Panel panel, GeometryGraph AVLTree)
-        //{
-        //    //Зададим основные настройки макета
-        //    var settings = new SugiyamaLayoutSettings
-        //    {
-        //        //Установим стиль отображения рёбер
-        //        EdgeRoutingSettings = { EdgeRoutingMode = EdgeRoutingMode.StraightLine }
-        //    };
-        //    //Создадим макет с заданными настройками из данных объекта
-        //    var layout = new LayeredLayout(Tree, settings);
-        //    layout.Run();
-        //    AVLTree1 = Tree;
-        //    AVLTree2 = Tree;
-        //    //Перерисуем панель, где отображается дерево
-        //    panel.Refresh();
-        //    return Tree;
-        //}
-        //private void DrawRoot11(NodeTree current)
-        //{
-        //    if (current != null)
-        //    {
-        //        if (current.left != null)
-        //        {
-        //            Tree.Edges.Add(new Edge(Tree.FindNodeByUserData(current.left.data.ToString()), Tree.FindNodeByUserData(current.data.ToString())));
-        //        }
-        //    }
-        //    AVLTree = CreateAndLayoutGraph(Tree);
-        //}
 
         private void DrawNode(NodeTree current, GeometryGraph treeA)
         {
@@ -213,10 +173,7 @@ namespace AVLTree
             else
             {
                 avltree.root = RecursiveInsert(avltree.root, newItem);
-                
-
                 //DisplayTreeDraw(ClassAVLTree3, Tree3);
-
             }
         }
         private NodeTree RecursiveInsert(NodeTree current, NodeTree n)
@@ -422,7 +379,7 @@ namespace AVLTree
             NodeTree pivot2 = pivot.right;
             pivot.right = pivot2.left;
             pivot2.left = pivot;
-            return pivot;
+            parent.left = pivot2;
 
             //return RotateLL(parent);
             NodeTree pivot3 = parent.left;
@@ -487,8 +444,16 @@ namespace AVLTree
             if (Tree4 != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, Tree4, e.Graphics);
         }
 
+        private void buttonTestCase_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < aaraytestCase.Length; i++)
+            {
+                Add(aaraytestCase[i], ClassAVLTree4);
+            }
+            ConnectTreeAndDraw(ClassAVLTree4, Tree4);
+            panelDrawTree1.Refresh();
 
-
+        }
     }
 
 }
