@@ -15,49 +15,48 @@ namespace AVLTree
 {
     public partial class MainForm : Form
     {
-        static public int[] aaraytestCase = new int[] { 1, 2, 3, 5 };
+        static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1 , 0 ,6 ,7 ,8 ,9};
         static private double radius = 10;
-        static public int speedDraw = 10;
+        static public int speedDraw = 100;
 
         //Инициализируем объект, хранящий данные для графического представления дерева
-        static public GeometryGraph ClassActualTree = new GeometryGraph();
-        static public GeometryGraph Tree1 = new GeometryGraph();
-        static public GeometryGraph Tree2 = new GeometryGraph();
-        static public GeometryGraph Tree3 = new GeometryGraph();
-        static public GeometryGraph Tree4 = new GeometryGraph();
-        static public GeometryGraph Tree5 = new GeometryGraph();
-        static public GeometryGraph Tree6 = new GeometryGraph();
+        //static public GeometryGraph ClassActualTree = new GeometryGraph();
+        //static public GeometryGraph Tree1 = new GeometryGraph();
+        //static public GeometryGraph Tree2 = new GeometryGraph();
+        //static public GeometryGraph Tree3 = new GeometryGraph();
+        //static public GeometryGraph Tree4 = new GeometryGraph();
+        //static public GeometryGraph Tree5 = new GeometryGraph();
+        //static public GeometryGraph Tree6 = new GeometryGraph();
+        //static public GeometryGraph[] treeNode = new GeometryGraph[5];
 
 
-        static private AVL ClassAVLTreeActual = new AVL();
-        static private AVL ClassAVLTree1 = new AVL();
-        static private AVL ClassAVLTree2 = new AVL();
-        static private AVL ClassAVLTree3 = new AVL();
-        static private AVL ClassAVLTree4 = new AVL();
-        static private AVL ClassAVLTree5 = new AVL();
-        static private AVL ClassAVLTree6 = new AVL();
+        //static private AVL ClassAVLTreeActual = new AVL();
+        //static private AVL ClassAVLTree1 = new AVL();
+        //static private AVL ClassAVLTree2 = new AVL();
+        //static private AVL ClassAVLTree3 = new AVL();
+        //static private AVL ClassAVLTree4 = new AVL();
+        //static private AVL ClassAVLTree5 = new AVL();
+        //static private AVL ClassAVLTree6 = new AVL();
+
+
+        static public List<GeometryGraph> MainTree = new List<GeometryGraph>();
+        static public List<AVL> listClassAVLTree = new List<AVL>();
 
         public MainForm()
         {
-            //GeometryGraph[] treeNode = new GeometryGraph[5];
-            //for (int counter = 0; counter < 5; counter++)
-            //{
-            //    treeNode[counter] = new GeometryGraph();
-            //}
-            //AVL[] treeNodeAVL = new AVL[5];
-            //for (int counter = 0; counter < 5; counter++)
-            //{
-            //    treeNode[counter] = new GeometryGraph();
-            //}
-
             InitializeComponent();
-            
-            Add(50, ClassAVLTree4);
-            //ClassAVLTree2 = ClassAVLTree1;
-            //ClassAVLTree3 = ClassAVLTree1;
-            //ClassAVLTree4 = ClassAVLTree1;
 
-            ConnectTreeAndDraw(ClassAVLTree4, Tree4);
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+
+
+
+            for (int i = 0; i < listClassAVLTree.Count; i++)
+            {
+                Add(50, listClassAVLTree[i]);
+            }
+
+            ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
@@ -65,10 +64,10 @@ namespace AVLTree
             
             if (textBoxAddNode.Text != "")
             {
-                Add(int.Parse(textBoxAddNode.Text), ClassAVLTree4);
+                Add(int.Parse(textBoxAddNode.Text), listClassAVLTree[0]);
             }
             textBoxAddNode.Text = "";
-            ConnectTreeAndDraw(ClassAVLTree4, Tree4);
+            ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
             panelDrawTree1.Refresh();
             
         }
@@ -356,7 +355,6 @@ namespace AVLTree
         private NodeTree RotateRR(NodeTree parent)
         {
             Console.WriteLine("--------------RotateRR--------------");
-            //DisplayTreeDraw(ClassAVLTree2, Tree2);
             NodeTree pivot = parent.right;
             parent.right = pivot.left;
             pivot.left = parent;
@@ -432,27 +430,26 @@ namespace AVLTree
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
         {
             //При каждой отрисовке панели также отобразим на ней дерево  
-            //if (Tree1 != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, Tree1, e.Graphics);
-            //System.Threading.Thread.Sleep(speedDraw);
-            //e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-            //if (Tree2 != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, Tree2, e.Graphics);
-            //System.Threading.Thread.Sleep(speedDraw);
-            //e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-            //if (Tree3 != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, Tree3, e.Graphics);
-            //System.Threading.Thread.Sleep(speedDraw);
-            //e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-            if (Tree4 != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, Tree4, e.Graphics);
+            foreach (GeometryGraph index in MainTree)
+            {
+                System.Threading.Thread.Sleep(speedDraw);
+                e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
+                if (MainTree != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, index, e.Graphics);
+            }
+
         }
 
         private void buttonTestCase_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < aaraytestCase.Length; i++)
+            for (int i = 0; i < listClassAVLTree.Count; i++)
             {
-                Add(aaraytestCase[i], ClassAVLTree4);
+                for (int j = 0; j < aaraytestCase.Length; j++)
+                {
+                    Add(aaraytestCase[j], listClassAVLTree[0]);
+                }
+                ConnectTreeAndDraw(listClassAVLTree[i], MainTree[i]);
+                panelDrawTree1.Refresh();
             }
-            ConnectTreeAndDraw(ClassAVLTree4, Tree4);
-            panelDrawTree1.Refresh();
-
         }
     }
 
