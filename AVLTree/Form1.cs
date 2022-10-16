@@ -464,15 +464,15 @@ namespace AVLTree
 
         private void buttonTestCase_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < aaraytestCase.Length; i++)
             {
-                for (int j = 0; j < aaraytestCase.Length; j++)
-                {
-                    Add(aaraytestCase[j], listClassAVLTree[i]);
-                }
-                ConnectTreeAndDraw(listClassAVLTree[i], MainTree[i]);
+                textBoxAddNode.Text = (aaraytestCase[i]).ToString();
+                buttonAddNode_Click(null, null);
+                textBoxAddNode.Text = "";
             }
-            panelDrawTree1.Refresh();
+                
+
+
         }
     }
 }
