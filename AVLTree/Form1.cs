@@ -372,6 +372,7 @@ namespace AVLTree
             NodeTree pivot = parent.left;
             parent.left = pivot.right;
             pivot.right = parent;
+
             return pivot;
         }
         private NodeTree RotateLR(NodeTree parent)
@@ -396,10 +397,10 @@ namespace AVLTree
             parent.left = pivot3.right;
             pivot3.right = parent;
 
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
-            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+            //MainTree.Add(new GeometryGraph());
+            //listClassAVLTree.Add(new AVL());
+            //listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            //ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
 
             return pivot3;
 
@@ -415,6 +416,10 @@ namespace AVLTree
             pivot2.right = pivot;
             parent.right = pivot2;
 
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
 
             //return RotateRR(parent);
             NodeTree pivot3 = parent.right;
