@@ -83,6 +83,7 @@
             this.panelDrawTree1.Size = new System.Drawing.Size(1184, 485);
             this.panelDrawTree1.TabIndex = 4;
             this.panelDrawTree1.UseWaitCursor = true;
+            this.panelDrawTree1.Visible = false;
             this.panelDrawTree1.SizeChanged += new System.EventHandler(this.panelDrawTree_SizeChanged);
             this.panelDrawTree1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDrawTree_Paint);
             // 

@@ -31,6 +31,7 @@ namespace AVLTree
         static public int speedDraw = 1000;
         static public int firstNumber = 50;
         static public int Number = 50;
+        static public bool firstStart = true;
 
         //Инициализируем объект, хранящий данные для графического представления дерева
         //static public GeometryGraph ClassActualTree = new GeometryGraph();
@@ -63,39 +64,43 @@ namespace AVLTree
         {
             InitializeComponent();
 
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
+            //MainTree.Add(new GeometryGraph());
+            //listClassAVLTree.Add(new AVL());
 
-            //for (int i = 0; i < listClassAVLTree.Count; i++)
-            {
-                Add(firstNumber, listClassAVLTree[0]);
-                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-                Add(firstNumber, listClassAVLTreeFirst);
-                ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
-            }
+            ////for (int i = 0; i < listClassAVLTree.Count; i++)
+            //{
+            //    Add(firstNumber, listClassAVLTree[0]);
+            //    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+            //    Add(firstNumber, listClassAVLTreeFirst);
+            //    ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+            //}
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
+
+            //panelDrawTree1.Visible = true;
+
             MainTree.Add(new GeometryGraph());
             listClassAVLTree.Add(new AVL());
 
-
-            Add(Number, listClassAVLTreeFirst);
-            ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+            if (firstStart == false)
+            {
+                Add(Number, listClassAVLTreeFirst);
+                ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+            }
 
             GeometryGraph MainTreeMain = MainTree[0];
             AVL listClassAVLTreeMain = listClassAVLTree[0];
 
             MainTree = new List<GeometryGraph>();
-            listClassAVLTree = new List<AVL>(); 
+            listClassAVLTree = new List<AVL>();
 
             MainTree.Add(new GeometryGraph());
             listClassAVLTree.Add(new AVL());
 
             listClassAVLTree[0] = listClassAVLTreeMain;
             MainTree[0] = MainTreeMain;
-
 
             if (textBoxAddNode.Text != "")
             {
@@ -110,15 +115,14 @@ namespace AVLTree
                     //Add(Number, listClassAVLTreeFirst);
                     //ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
                 }
-               
+
             }
+            panelDrawTree1.Visible = true;
+            
             textBoxAddNode.Text = "";
             //ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-
             panelDrawTree1.Refresh();
-
-
-
+            firstStart = false;
         }
 
         private void ConnectTreeAndDraw(AVL ClassTree, GeometryGraph Tree)
@@ -226,7 +230,7 @@ namespace AVLTree
         private void panelDrawTree_SizeChanged(object sender, EventArgs e)
         {
             //Перерисуем дерево, если размер панели визуального представления изменился
-            panelDrawTree1.Invalidate();
+            //panelDrawTree1.Invalidate();
             //panelDrawTree2.Invalidate();
         }
         ////////////////////////////////////////////////////////////////////////
@@ -472,7 +476,7 @@ namespace AVLTree
             pivot2.left = pivot;
             parent.left = pivot2;
 
-            
+
             listClassAVLTree[listClassAVLTree.Count - 2] = listClassAVLTree[0];
             ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 2], MainTree[listClassAVLTree.Count - 2]);
 
@@ -538,13 +542,15 @@ namespace AVLTree
         }
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-            if (MainTreeFirst != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTreeFirst, e.Graphics);
-            System.Threading.Thread.Sleep(speedDraw);
-
+            if (firstStart == false)
+            {
+                e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
+                if (MainTreeFirst != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTreeFirst, e.Graphics);
+                System.Threading.Thread.Sleep(speedDraw);
+            }
 
             //При каждой отрисовке панели также отобразим на ней дерево  
-            for (int i = listClassAVLTree.Count-1; i > -1 ; i--)
+            for (int i = listClassAVLTree.Count - 1; i > -1; i--)
             {
                 e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
                 if (MainTree[i] != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTree[i], e.Graphics);
@@ -561,15 +567,15 @@ namespace AVLTree
                 buttonAddNode_Click(null, null);
                 textBoxAddNode.Text = "";
             }
-                
+
 
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             panelDrawTree1.Refresh();
+
         }
     }
 }
