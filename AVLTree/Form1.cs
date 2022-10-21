@@ -15,10 +15,22 @@ namespace AVLTree
 {
     public partial class MainForm : Form
     {
+        //ALL
         static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1, 0, 6, 7, 8, 9 };
+        //LR
+        //static public int[] aaraytestCase = new int[] { 4, 5 };
+        //RL
+        //static public int[] aaraytestCase = new int[] { 60, 55};
+        //RR
+        //static public int[] aaraytestCase = new int[] { 55, 60 };
+        //LL
+        //static public int[] aaraytestCase = new int[] { 40, 45  };
+
+
         static private double radius = 10;
         static public int speedDraw = 1000;
         static public int firstNumber = 50;
+        static public int Number = 50;
 
         //Инициализируем объект, хранящий данные для графического представления дерева
         //static public GeometryGraph ClassActualTree = new GeometryGraph();
@@ -42,6 +54,10 @@ namespace AVLTree
 
         static public List<GeometryGraph> MainTree = new List<GeometryGraph>();
         static public List<AVL> listClassAVLTree = new List<AVL>();
+        static public GeometryGraph MainTreeFirst = new GeometryGraph();
+        static public AVL listClassAVLTreeFirst = new AVL();
+
+
 
         public MainForm()
         {
@@ -54,26 +70,54 @@ namespace AVLTree
             {
                 Add(firstNumber, listClassAVLTree[0]);
                 ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+                Add(firstNumber, listClassAVLTreeFirst);
+                ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
             }
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+
+
+            Add(Number, listClassAVLTreeFirst);
+            ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+
+            GeometryGraph MainTreeMain = MainTree[0];
+            AVL listClassAVLTreeMain = listClassAVLTree[0];
+
+            MainTree = new List<GeometryGraph>();
+            listClassAVLTree = new List<AVL>(); 
+
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+
+            listClassAVLTree[0] = listClassAVLTreeMain;
+            MainTree[0] = MainTreeMain;
 
 
             if (textBoxAddNode.Text != "")
             {
-                for (int i = 0; i < listClassAVLTree.Count; i++)
+                //for (int i = 0; i < listClassAVLTree.Count; i++)
                 {
-                    Add(firstNumber, listClassAVLTree[i]);
-                    ConnectTreeAndDraw(listClassAVLTree[i], MainTree[i]);
+
+                    Add(int.Parse(textBoxAddNode.Text), listClassAVLTree[0]);
+                    Number = int.Parse(textBoxAddNode.Text);
+                    //Add(firstNumber, listClassAVLTree[i]);
+                    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+
+                    //Add(Number, listClassAVLTreeFirst);
+                    //ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
                 }
-                Add(int.Parse(textBoxAddNode.Text), listClassAVLTree[0]);
+               
             }
             textBoxAddNode.Text = "";
-            ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+            //ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
 
             panelDrawTree1.Refresh();
+
+
 
         }
 
@@ -156,6 +200,25 @@ namespace AVLTree
             ////Перерисуем панель, где отображается дерево
             //DisplayTreeDraw(ClassAVLTree1, panelDrawTree1, Tree1);
             //panelDrawTree1.Refresh();
+
+            GeometryGraph MainTreeMain = MainTree[0];
+            AVL listClassAVLTreeMain = listClassAVLTree[0];
+
+
+            MainTree = new List<GeometryGraph>();
+            listClassAVLTree = new List<AVL>();
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            listClassAVLTree[0] = listClassAVLTreeMain;
+            MainTree[0] = MainTreeMain;
+
+            if (textBoxDeleteNode.Text != "")
+            {
+                Delete(int.Parse(textBoxDeleteNode.Text), listClassAVLTree[0]);
+                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+            }
+            textBoxDeleteNode.Text = "";
+            panelDrawTree1.Refresh();
         }
 
 
@@ -163,7 +226,7 @@ namespace AVLTree
         private void panelDrawTree_SizeChanged(object sender, EventArgs e)
         {
             //Перерисуем дерево, если размер панели визуального представления изменился
-            //panelDrawTree1.Invalidate();
+            panelDrawTree1.Invalidate();
             //panelDrawTree2.Invalidate();
         }
         ////////////////////////////////////////////////////////////////////////
@@ -359,6 +422,12 @@ namespace AVLTree
         }
         private NodeTree RotateRR(NodeTree parent)
         {
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+
+
             Console.WriteLine("--------------RotateRR--------------");
             NodeTree pivot = parent.right;
             parent.right = pivot.left;
@@ -368,6 +437,12 @@ namespace AVLTree
         }
         private NodeTree RotateLL(NodeTree parent)
         {
+
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+
             Console.WriteLine("--------------RotateLL--------------");
             NodeTree pivot = parent.left;
             parent.left = pivot.right;
@@ -377,9 +452,19 @@ namespace AVLTree
         }
         private NodeTree RotateLR(NodeTree parent)
         {
+
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+
+
+            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+
+
             Console.WriteLine("--------------RotateLR--------------");
             NodeTree pivot = parent.left;
-
 
             //parent.left = RotateRR(pivot);
             NodeTree pivot2 = pivot.right;
@@ -387,26 +472,29 @@ namespace AVLTree
             pivot2.left = pivot;
             parent.left = pivot2;
 
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
-            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+            
+            listClassAVLTree[listClassAVLTree.Count - 2] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 2], MainTree[listClassAVLTree.Count - 2]);
 
             //return RotateLL(parent);
             NodeTree pivot3 = parent.left;
             parent.left = pivot3.right;
             pivot3.right = parent;
 
-            //MainTree.Add(new GeometryGraph());
-            //listClassAVLTree.Add(new AVL());
-            //listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
-            //ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
-
             return pivot3;
 
         }
         private NodeTree RotateRL(NodeTree parent)
         {
+
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+            MainTree.Add(new GeometryGraph());
+            listClassAVLTree.Add(new AVL());
+
+            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+
             Console.WriteLine("--------------RotateRL--------------");
             NodeTree pivot = parent.right;
 
@@ -416,10 +504,8 @@ namespace AVLTree
             pivot2.right = pivot;
             parent.right = pivot2;
 
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-            listClassAVLTree[listClassAVLTree.Count - 1] = listClassAVLTree[0];
-            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 1], MainTree[listClassAVLTree.Count - 1]);
+            listClassAVLTree[listClassAVLTree.Count - 2] = listClassAVLTree[0];
+            ConnectTreeAndDraw(listClassAVLTree[listClassAVLTree.Count - 2], MainTree[listClassAVLTree.Count - 2]);
 
             //return RotateRR(parent);
             NodeTree pivot3 = parent.right;
@@ -452,6 +538,11 @@ namespace AVLTree
         }
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
+            if (MainTreeFirst != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTreeFirst, e.Graphics);
+            System.Threading.Thread.Sleep(speedDraw);
+
+
             //При каждой отрисовке панели также отобразим на ней дерево  
             for (int i = listClassAVLTree.Count-1; i > -1 ; i--)
             {
@@ -473,6 +564,12 @@ namespace AVLTree
                 
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            panelDrawTree1.Refresh();
         }
     }
 }
