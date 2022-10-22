@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Msagl.Core.Geometry;
@@ -15,6 +16,7 @@ namespace AVLTree
 {
     public partial class MainForm : Form
     {
+        static public List<int> numberFromFile = new List<int>();
         //ALL
         static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1, 0, 6, 7, 8, 9 };
         //LR
@@ -561,14 +563,32 @@ namespace AVLTree
 
         private void buttonTestCase_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < aaraytestCase.Length; i++)
+            //for (int i = 0; i < aaraytestCase.Length; i++)
+            //{
+            //    textBoxAddNode.Text = (aaraytestCase[i]).ToString();
+            //    buttonAddNode_Click(null, null);
+            //    textBoxAddNode.Text = "";
+            //}
+
+            using (StreamReader sr = new StreamReader("file.txt"))
             {
-                textBoxAddNode.Text = (aaraytestCase[i]).ToString();
+                string numbers = sr.ReadLine();
+                foreach (var number in numbers.Split())
+                {
+                    if (int.TryParse(number, out int val))
+                    {
+                        numberFromFile.Add(int.Parse(number));
+                    }
+                    
+                }
+            }
+            foreach (var number in numberFromFile)
+            {
+                Console.WriteLine(number);
+                textBoxAddNode.Text = (number).ToString();
                 buttonAddNode_Click(null, null);
                 textBoxAddNode.Text = "";
             }
-
-
 
         }
 
