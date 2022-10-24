@@ -34,19 +34,12 @@ namespace AVLTree
         static private double radius = 10;
         static public int speedDraw = 1000;
         static public int firstNumber = 50;
-
-
         static public bool firstStart = true;
-
-        static public bool addNode = false;
-        static public bool deleteNode = true;
 
 
         static public List<GeometryGraph> MainTree =  new List<GeometryGraph>();
         static public List<AVL> listClassAVLTree = new List<AVL>();
         static public GeometryGraph MainTreeFirst = new GeometryGraph();
-        static public AVL listClassAVLTreeFirst = new AVL();
-
 
 
         public MainForm()
@@ -80,7 +73,6 @@ namespace AVLTree
 
                     listClassAVLTree[0] = listClassAVLTreeMain;
                     MainTree[0] = MainTreeMain;
-
 
 
                     Add(val, listClassAVLTree[0]);
@@ -130,7 +122,6 @@ namespace AVLTree
 
 
                     Delete(val, listClassAVLTree[0]);
-                    //addNumber = int.Parse(textBoxDeleteNode.Text);
                     ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
 
                     panelDrawTree1.Visible = true;
@@ -160,12 +151,10 @@ namespace AVLTree
 
             if (ClassTree.root == null)
             {
-                //Console.WriteLine("Tree is empty");
                 return;
             }
             DrawNode(ClassTree.root, Tree);
             DrawNodeConnections(ClassTree.root, Tree);
-            //Tree = null;
             //Зададим основные настройки макета
             var settings = new SugiyamaLayoutSettings
             {
@@ -175,10 +164,6 @@ namespace AVLTree
             //Создадим макет с заданными настройками из данных объекта
             var layout = new LayeredLayout(Tree, settings);
             layout.Run();
-            //Tree1 = Tree;
-            //Tree2 = Tree;
-            //Перерисуем панель, где отображается дерево
-            //panel.Refresh();
         }
 
         private void DrawNode(NodeTree current, GeometryGraph treeA)
@@ -187,7 +172,6 @@ namespace AVLTree
             {
                 DrawNode(current.right, treeA);
                 DrawNode(current.left, treeA);
-                //Console.Write("({0}) ", current.data);
                 DrawHelpers.AddNode(current.data.ToString(), treeA, radius);
             }
         }
@@ -221,8 +205,7 @@ namespace AVLTree
         private void panelDrawTree_SizeChanged(object sender, EventArgs e)
         {
             //Перерисуем дерево, если размер панели визуального представления изменился
-            //panelDrawTree1.Invalidate();
-            //panelDrawTree2.Invalidate();
+            panelDrawTree1.Invalidate();
         }
         ////////////////////////////////////////////////////////////////////////
         public void Add(int data, AVL avltree)
@@ -235,7 +218,6 @@ namespace AVLTree
             else
             {
                 avltree.root = RecursiveInsert(avltree.root, newItem);
-                //DisplayTreeDraw(ClassAVLTree3, Tree3);
             }
         }
         private NodeTree RecursiveInsert(NodeTree current, NodeTree n)
@@ -602,17 +584,17 @@ namespace AVLTree
 
         private void radioButtonSpeed1_CheckedChanged(object sender, EventArgs e)
         {
-            speedDraw = 1000;
+            speedDraw = 100;
         }
 
         private void radioButtonSpeed2_CheckedChanged(object sender, EventArgs e)
         {
-            speedDraw = 500;
+            speedDraw = 1000;
         }
 
         private void radioButtonSpeed3_CheckedChanged(object sender, EventArgs e)
         {
-            speedDraw = 100;
+            speedDraw = 2000;
         }
 
 

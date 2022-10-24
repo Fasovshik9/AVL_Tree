@@ -180,6 +180,8 @@
             this.ClientSize = new System.Drawing.Size(1208, 713);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDrawTree1);
+            this.MaximumSize = new System.Drawing.Size(1224, 752);
+            this.MinimumSize = new System.Drawing.Size(1224, 752);
             this.Name = "MainForm";
             this.Text = "AVLTree";
             this.panel1.ResumeLayout(false);
