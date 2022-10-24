@@ -58,33 +58,41 @@ namespace AVLTree
         {
             if (int.TryParse(textBoxAddNode.Text, out int val))
             {
-                
-                MainTree.Add(new GeometryGraph());
-                listClassAVLTree.Add(new AVL());
-                ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
+                if ((firstStart == false) && (Find(val, listClassAVLTree[0])))
+                {
+                    MessageBox.Show("Данное значение уже есть в дереве!", "Error");
+                    textBoxAddNode.Text = "";
+                }
+                else
+                {
+                    MainTree.Add(new GeometryGraph());
+                    listClassAVLTree.Add(new AVL());
+                    ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
 
-                GeometryGraph MainTreeMain = MainTree[0];
-                AVL listClassAVLTreeMain = listClassAVLTree[0];
-  
-                MainTree = new List<GeometryGraph>();
-                listClassAVLTree = new List<AVL>();
+                    GeometryGraph MainTreeMain = MainTree[0];
+                    AVL listClassAVLTreeMain = listClassAVLTree[0];
 
-                MainTree.Add(new GeometryGraph());
-                listClassAVLTree.Add(new AVL());
+                    MainTree = new List<GeometryGraph>();
+                    listClassAVLTree = new List<AVL>();
 
-                listClassAVLTree[0] = listClassAVLTreeMain;
-                MainTree[0] = MainTreeMain;
-                
+                    MainTree.Add(new GeometryGraph());
+                    listClassAVLTree.Add(new AVL());
+
+                    listClassAVLTree[0] = listClassAVLTreeMain;
+                    MainTree[0] = MainTreeMain;
 
 
-                Add(val, listClassAVLTree[0]);
-                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
 
-                panelDrawTree1.Visible = true;
+                    Add(val, listClassAVLTree[0]);
+                    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
 
-                textBoxAddNode.Text = "";
-                panelDrawTree1.Refresh();
-                firstStart = false;
+                    panelDrawTree1.Visible = true;
+
+                    textBoxAddNode.Text = "";
+                    panelDrawTree1.Refresh();
+                    firstStart = false;
+                }
+
             }
             else
             {
@@ -95,38 +103,53 @@ namespace AVLTree
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBoxDeleteNode.Text != "")
+            if (int.TryParse(textBoxDeleteNode.Text, out int val))
             {
-                MainTree.Add(new GeometryGraph());
-                listClassAVLTree.Add(new AVL());
-
-                if (firstStart == false)
+                if ((firstStart == false) && (Find(val, listClassAVLTree[0])))
                 {
-                    ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
+                    
+                    MainTree.Add(new GeometryGraph());
+                    listClassAVLTree.Add(new AVL());
+
+                    if (firstStart == false)
+                    {
+                        ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
+                    }
+
+                    GeometryGraph MainTreeMain = MainTree[0];
+                    AVL listClassAVLTreeMain = listClassAVLTree[0];
+
+                    MainTree = new List<GeometryGraph>();
+                    listClassAVLTree = new List<AVL>();
+
+                    MainTree.Add(new GeometryGraph());
+                    listClassAVLTree.Add(new AVL());
+
+                    listClassAVLTree[0] = listClassAVLTreeMain;
+                    MainTree[0] = MainTreeMain;
+
+
+                    Delete(val, listClassAVLTree[0]);
+                    //addNumber = int.Parse(textBoxDeleteNode.Text);
+                    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+
+                    panelDrawTree1.Visible = true;
+
+                    textBoxDeleteNode.Text = "";
+                    panelDrawTree1.Refresh();
+                    firstStart = false;
                 }
-
-                GeometryGraph MainTreeMain = MainTree[0];
-                AVL listClassAVLTreeMain = listClassAVLTree[0];
-
-                MainTree = new List<GeometryGraph>();
-                listClassAVLTree = new List<AVL>();
-
-                MainTree.Add(new GeometryGraph());
-                listClassAVLTree.Add(new AVL());
-
-                listClassAVLTree[0] = listClassAVLTreeMain;
-                MainTree[0] = MainTreeMain;
-
-            
-                Delete(int.Parse(textBoxDeleteNode.Text), listClassAVLTree[0]);
-                //addNumber = int.Parse(textBoxDeleteNode.Text);
-                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-            
-                panelDrawTree1.Visible = true;
-
+                else
+                {
+                    MessageBox.Show("Данного значения нет в дереве!", "Error");
+                    textBoxAddNode.Text = "";
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Вы ввели неверное значение", "Error");
                 textBoxDeleteNode.Text = "";
-                panelDrawTree1.Refresh();
-                firstStart = false;
             }
         }
 
@@ -335,19 +358,30 @@ namespace AVLTree
             }
             return current;
         }
-        public void Find(int key, AVL avltree)
+        public bool Find(int key, AVL avltree)
         {
-            if (Find(key, avltree.root).data == key)
+            if (Find(key, avltree.root) != null)
             {
-                Console.WriteLine("{0} was found!", key);
+                if (Find(key, avltree.root).data == key)
+                {
+                    Console.WriteLine("{0} was found!", key);
+                    return true;
+                }
             }
             else
             {
                 Console.WriteLine("Nothing found!");
+                return false;
             }
+            return false;
         }
         private NodeTree Find(int target, NodeTree current)
         {
+            if (current == null)
+            {
+                return current;
+            }
+
             if (target < current.data)
             {
                 if (target == current.data)
@@ -563,16 +597,7 @@ namespace AVLTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //panelDrawTree1.Refresh();
-            if (int.TryParse(textBoxAddNode.Text, out int val))
-            {
-                Find(val, listClassAVLTree[0]);
-                {
-                    //MessageBox.Show("Данное значение уже есть в дереве!", "Error");
-                    //textBoxAddNode.Text = "";
-                    //return;
-                }
-            }
+            panelDrawTree1.Refresh();
         }
 
         private void radioButtonSpeed1_CheckedChanged(object sender, EventArgs e)

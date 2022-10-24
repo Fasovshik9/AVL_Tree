@@ -35,30 +35,31 @@
             this.panelDrawTree1 = new System.Windows.Forms.Panel();
             this.buttonTestCase = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.radioButtonSpeed1 = new System.Windows.Forms.RadioButton();
-            this.radioButtonSpeed2 = new System.Windows.Forms.RadioButton();
             this.radioButtonSpeed3 = new System.Windows.Forms.RadioButton();
+            this.radioButtonSpeed2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonSpeed1 = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddNode
             // 
-            this.buttonAddNode.Location = new System.Drawing.Point(444, 23);
+            this.buttonAddNode.Location = new System.Drawing.Point(423, 23);
             this.buttonAddNode.Name = "buttonAddNode";
-            this.buttonAddNode.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddNode.Size = new System.Drawing.Size(119, 23);
             this.buttonAddNode.TabIndex = 0;
-            this.buttonAddNode.Text = "Add Node";
+            this.buttonAddNode.Text = "Добавить элемент";
             this.buttonAddNode.UseVisualStyleBackColor = true;
             this.buttonAddNode.Click += new System.EventHandler(this.buttonAddNode_Click);
             // 
             // buttonDeleteNode
             // 
-            this.buttonDeleteNode.Location = new System.Drawing.Point(444, 52);
+            this.buttonDeleteNode.Location = new System.Drawing.Point(423, 50);
             this.buttonDeleteNode.Name = "buttonDeleteNode";
-            this.buttonDeleteNode.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteNode.Size = new System.Drawing.Size(119, 23);
             this.buttonDeleteNode.TabIndex = 1;
-            this.buttonDeleteNode.Text = "Delete Node";
+            this.buttonDeleteNode.Text = "Удалить элемент";
             this.buttonDeleteNode.UseVisualStyleBackColor = true;
             this.buttonDeleteNode.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -83,7 +84,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDrawTree1.Location = new System.Drawing.Point(12, 133);
             this.panelDrawTree1.Name = "panelDrawTree1";
-            this.panelDrawTree1.Size = new System.Drawing.Size(1184, 485);
+            this.panelDrawTree1.Size = new System.Drawing.Size(1184, 568);
             this.panelDrawTree1.TabIndex = 4;
             this.panelDrawTree1.UseWaitCursor = true;
             this.panelDrawTree1.Visible = false;
@@ -92,16 +93,17 @@
             // 
             // buttonTestCase
             // 
-            this.buttonTestCase.Location = new System.Drawing.Point(569, 24);
+            this.buttonTestCase.Location = new System.Drawing.Point(569, 23);
             this.buttonTestCase.Name = "buttonTestCase";
-            this.buttonTestCase.Size = new System.Drawing.Size(85, 23);
+            this.buttonTestCase.Size = new System.Drawing.Size(128, 23);
             this.buttonTestCase.TabIndex = 5;
-            this.buttonTestCase.Text = "Test Case";
+            this.buttonTestCase.Text = "Добавить из файла";
             this.buttonTestCase.UseVisualStyleBackColor = true;
             this.buttonTestCase.Click += new System.EventHandler(this.buttonTestCase_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.radioButtonSpeed3);
             this.panel1.Controls.Add(this.radioButtonSpeed2);
             this.panel1.Controls.Add(this.radioButtonSpeed1);
@@ -116,63 +118,70 @@
             this.panel1.Size = new System.Drawing.Size(1181, 100);
             this.panel1.TabIndex = 6;
             // 
-            // button1
+            // radioButtonSpeed3
             // 
-            this.button1.Location = new System.Drawing.Point(569, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "buttonRepeat";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // radioButtonSpeed1
-            // 
-            this.radioButtonSpeed1.AutoSize = true;
-            this.radioButtonSpeed1.Checked = true;
-            this.radioButtonSpeed1.Location = new System.Drawing.Point(702, 13);
-            this.radioButtonSpeed1.Name = "radioButtonSpeed1";
-            this.radioButtonSpeed1.Size = new System.Drawing.Size(116, 17);
-            this.radioButtonSpeed1.TabIndex = 7;
-            this.radioButtonSpeed1.TabStop = true;
-            this.radioButtonSpeed1.Text = "radioButtonSpeed1";
-            this.radioButtonSpeed1.UseVisualStyleBackColor = true;
-            this.radioButtonSpeed1.CheckedChanged += new System.EventHandler(this.radioButtonSpeed1_CheckedChanged);
+            this.radioButtonSpeed3.AutoSize = true;
+            this.radioButtonSpeed3.Location = new System.Drawing.Point(760, 75);
+            this.radioButtonSpeed3.Name = "radioButtonSpeed3";
+            this.radioButtonSpeed3.Size = new System.Drawing.Size(76, 17);
+            this.radioButtonSpeed3.TabIndex = 9;
+            this.radioButtonSpeed3.Text = "Медленно";
+            this.radioButtonSpeed3.UseVisualStyleBackColor = true;
+            this.radioButtonSpeed3.CheckedChanged += new System.EventHandler(this.radioButtonSpeed3_CheckedChanged);
             // 
             // radioButtonSpeed2
             // 
             this.radioButtonSpeed2.AutoSize = true;
-            this.radioButtonSpeed2.Location = new System.Drawing.Point(702, 35);
+            this.radioButtonSpeed2.Checked = true;
+            this.radioButtonSpeed2.Location = new System.Drawing.Point(760, 52);
             this.radioButtonSpeed2.Name = "radioButtonSpeed2";
-            this.radioButtonSpeed2.Size = new System.Drawing.Size(116, 17);
+            this.radioButtonSpeed2.Size = new System.Drawing.Size(83, 17);
             this.radioButtonSpeed2.TabIndex = 8;
             this.radioButtonSpeed2.TabStop = true;
-            this.radioButtonSpeed2.Text = "radioButtonSpeed2";
+            this.radioButtonSpeed2.Text = "Нормально";
             this.radioButtonSpeed2.UseVisualStyleBackColor = true;
             this.radioButtonSpeed2.CheckedChanged += new System.EventHandler(this.radioButtonSpeed2_CheckedChanged);
             // 
-            // radioButtonSpeed3
+            // radioButtonSpeed1
             // 
-            this.radioButtonSpeed3.AutoSize = true;
-            this.radioButtonSpeed3.Location = new System.Drawing.Point(702, 58);
-            this.radioButtonSpeed3.Name = "radioButtonSpeed3";
-            this.radioButtonSpeed3.Size = new System.Drawing.Size(116, 17);
-            this.radioButtonSpeed3.TabIndex = 9;
-            this.radioButtonSpeed3.TabStop = true;
-            this.radioButtonSpeed3.Text = "radioButtonSpeed3";
-            this.radioButtonSpeed3.UseVisualStyleBackColor = true;
-            this.radioButtonSpeed3.CheckedChanged += new System.EventHandler(this.radioButtonSpeed3_CheckedChanged);
+            this.radioButtonSpeed1.AutoSize = true;
+            this.radioButtonSpeed1.Location = new System.Drawing.Point(760, 30);
+            this.radioButtonSpeed1.Name = "radioButtonSpeed1";
+            this.radioButtonSpeed1.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonSpeed1.TabIndex = 7;
+            this.radioButtonSpeed1.Text = "Быстро";
+            this.radioButtonSpeed1.UseVisualStyleBackColor = true;
+            this.radioButtonSpeed1.CheckedChanged += new System.EventHandler(this.radioButtonSpeed1_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(569, 51);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Отобразить повторно";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(727, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Скорость отображения дерева";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1208, 662);
+            this.ClientSize = new System.Drawing.Size(1208, 713);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDrawTree1);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "AVLTree";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -192,6 +201,7 @@
         private System.Windows.Forms.RadioButton radioButtonSpeed3;
         private System.Windows.Forms.RadioButton radioButtonSpeed2;
         private System.Windows.Forms.RadioButton radioButtonSpeed1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
