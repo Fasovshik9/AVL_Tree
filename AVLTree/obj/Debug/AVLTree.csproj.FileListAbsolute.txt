@@ -26,3 +26,17 @@ D:\novik\4 курс\Структуры и алгоритмы обработки 
 D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.csproj.CopyComplete
 D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.exe
 D:\novik\4 курс\Структуры и алгоритмы обработки данных\AVL_Tree\AVLTree\obj\Debug\AVLTree.pdb
+C:\Users\novik.vv\Desktop\cod\AVLTree3\bin\Debug\AVLTree.exe.config
+C:\Users\novik.vv\Desktop\cod\AVLTree3\bin\Debug\AVLTree.exe
+C:\Users\novik.vv\Desktop\cod\AVLTree3\bin\Debug\AVLTree.pdb
+C:\Users\novik.vv\Desktop\cod\AVLTree3\bin\Debug\Microsoft.Msagl.dll
+C:\Users\novik.vv\Desktop\cod\AVLTree3\bin\Debug\Microsoft.Msagl.xml
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.csproj.AssemblyReference.cache
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.csproj.SuggestedBindingRedirects.cache
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.MainForm.resources
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.Properties.Resources.resources
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.csproj.GenerateResource.cache
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.csproj.CoreCompileInputs.cache
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.csproj.CopyComplete
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.exe
+C:\Users\novik.vv\Desktop\cod\AVLTree3\obj\Debug\AVLTree.pdb

@@ -36,12 +36,15 @@
             this.buttonTestCase = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.radioButtonSpeed1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonSpeed2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonSpeed3 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddNode
             // 
-            this.buttonAddNode.Location = new System.Drawing.Point(133, 21);
+            this.buttonAddNode.Location = new System.Drawing.Point(444, 23);
             this.buttonAddNode.Name = "buttonAddNode";
             this.buttonAddNode.Size = new System.Drawing.Size(75, 23);
             this.buttonAddNode.TabIndex = 0;
@@ -51,7 +54,7 @@
             // 
             // buttonDeleteNode
             // 
-            this.buttonDeleteNode.Location = new System.Drawing.Point(133, 50);
+            this.buttonDeleteNode.Location = new System.Drawing.Point(444, 52);
             this.buttonDeleteNode.Name = "buttonDeleteNode";
             this.buttonDeleteNode.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteNode.TabIndex = 1;
@@ -61,14 +64,14 @@
             // 
             // textBoxAddNode
             // 
-            this.textBoxAddNode.Location = new System.Drawing.Point(6, 24);
+            this.textBoxAddNode.Location = new System.Drawing.Point(317, 26);
             this.textBoxAddNode.Name = "textBoxAddNode";
             this.textBoxAddNode.Size = new System.Drawing.Size(100, 20);
             this.textBoxAddNode.TabIndex = 2;
             // 
             // textBoxDeleteNode
             // 
-            this.textBoxDeleteNode.Location = new System.Drawing.Point(6, 50);
+            this.textBoxDeleteNode.Location = new System.Drawing.Point(317, 52);
             this.textBoxDeleteNode.Name = "textBoxDeleteNode";
             this.textBoxDeleteNode.Size = new System.Drawing.Size(100, 20);
             this.textBoxDeleteNode.TabIndex = 3;
@@ -89,7 +92,7 @@
             // 
             // buttonTestCase
             // 
-            this.buttonTestCase.Location = new System.Drawing.Point(258, 22);
+            this.buttonTestCase.Location = new System.Drawing.Point(569, 24);
             this.buttonTestCase.Name = "buttonTestCase";
             this.buttonTestCase.Size = new System.Drawing.Size(85, 23);
             this.buttonTestCase.TabIndex = 5;
@@ -99,6 +102,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.radioButtonSpeed3);
+            this.panel1.Controls.Add(this.radioButtonSpeed2);
+            this.panel1.Controls.Add(this.radioButtonSpeed1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.buttonAddNode);
             this.panel1.Controls.Add(this.buttonTestCase);
@@ -107,18 +113,55 @@
             this.panel1.Controls.Add(this.textBoxDeleteNode);
             this.panel1.Location = new System.Drawing.Point(15, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(496, 100);
+            this.panel1.Size = new System.Drawing.Size(1181, 100);
             this.panel1.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(258, 49);
+            this.button1.Location = new System.Drawing.Point(569, 51);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "buttonRepeat";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // radioButtonSpeed1
+            // 
+            this.radioButtonSpeed1.AutoSize = true;
+            this.radioButtonSpeed1.Checked = true;
+            this.radioButtonSpeed1.Location = new System.Drawing.Point(702, 13);
+            this.radioButtonSpeed1.Name = "radioButtonSpeed1";
+            this.radioButtonSpeed1.Size = new System.Drawing.Size(116, 17);
+            this.radioButtonSpeed1.TabIndex = 7;
+            this.radioButtonSpeed1.TabStop = true;
+            this.radioButtonSpeed1.Text = "radioButtonSpeed1";
+            this.radioButtonSpeed1.UseVisualStyleBackColor = true;
+            this.radioButtonSpeed1.CheckedChanged += new System.EventHandler(this.radioButtonSpeed1_CheckedChanged);
+            // 
+            // radioButtonSpeed2
+            // 
+            this.radioButtonSpeed2.AutoSize = true;
+            this.radioButtonSpeed2.Location = new System.Drawing.Point(702, 35);
+            this.radioButtonSpeed2.Name = "radioButtonSpeed2";
+            this.radioButtonSpeed2.Size = new System.Drawing.Size(116, 17);
+            this.radioButtonSpeed2.TabIndex = 8;
+            this.radioButtonSpeed2.TabStop = true;
+            this.radioButtonSpeed2.Text = "radioButtonSpeed2";
+            this.radioButtonSpeed2.UseVisualStyleBackColor = true;
+            this.radioButtonSpeed2.CheckedChanged += new System.EventHandler(this.radioButtonSpeed2_CheckedChanged);
+            // 
+            // radioButtonSpeed3
+            // 
+            this.radioButtonSpeed3.AutoSize = true;
+            this.radioButtonSpeed3.Location = new System.Drawing.Point(702, 58);
+            this.radioButtonSpeed3.Name = "radioButtonSpeed3";
+            this.radioButtonSpeed3.Size = new System.Drawing.Size(116, 17);
+            this.radioButtonSpeed3.TabIndex = 9;
+            this.radioButtonSpeed3.TabStop = true;
+            this.radioButtonSpeed3.Text = "radioButtonSpeed3";
+            this.radioButtonSpeed3.UseVisualStyleBackColor = true;
+            this.radioButtonSpeed3.CheckedChanged += new System.EventHandler(this.radioButtonSpeed3_CheckedChanged);
             // 
             // MainForm
             // 
@@ -146,6 +189,9 @@
         private System.Windows.Forms.Button buttonTestCase;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton radioButtonSpeed3;
+        private System.Windows.Forms.RadioButton radioButtonSpeed2;
+        private System.Windows.Forms.RadioButton radioButtonSpeed1;
     }
 }
 

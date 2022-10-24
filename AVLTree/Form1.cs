@@ -5,11 +5,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Microsoft.Msagl.Core.Geometry;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using Microsoft.Msagl.Core.Layout;
 using Microsoft.Msagl.Core.Routing;
 using Microsoft.Msagl.Layout.Layered;
+using static AVLTree.MainForm;
 using static AVLTree.MainForm.AVL;
 
 namespace AVLTree
@@ -18,44 +20,29 @@ namespace AVLTree
     {
         static public List<int> numberFromFile = new List<int>();
         //ALL
-        static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1, 0, 6, 7, 8, 9 };
+        //static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1, 0, 6, 7, 8, 9 };
         //LR
-        //static public int[] aaraytestCase = new int[] { 4, 5 };
+        static public int[] aaraytestCase = new int[] {50, 4, 5 };
         //RL
-        //static public int[] aaraytestCase = new int[] { 60, 55};
+        //static public int[] aaraytestCase = new int[] {50, 60, 55};
         //RR
-        //static public int[] aaraytestCase = new int[] { 55, 60 };
+        //static public int[] aaraytestCase = new int[] {50, 55, 60 };
         //LL
-        //static public int[] aaraytestCase = new int[] { 40, 45  };
-
+        //static public int[] aaraytestCase = new int[] {50, 40, 45  };
+   
 
         static private double radius = 10;
         static public int speedDraw = 1000;
         static public int firstNumber = 50;
-        static public int Number = 50;
+
+
         static public bool firstStart = true;
 
-        //Инициализируем объект, хранящий данные для графического представления дерева
-        //static public GeometryGraph ClassActualTree = new GeometryGraph();
-        //static public GeometryGraph Tree1 = new GeometryGraph();
-        //static public GeometryGraph Tree2 = new GeometryGraph();
-        //static public GeometryGraph Tree3 = new GeometryGraph();
-        //static public GeometryGraph Tree4 = new GeometryGraph();
-        //static public GeometryGraph Tree5 = new GeometryGraph();
-        //static public GeometryGraph Tree6 = new GeometryGraph();
-        //static public GeometryGraph[] treeNode = new GeometryGraph[5];
+        static public bool addNode = false;
+        static public bool deleteNode = true;
 
 
-        //static private AVL ClassAVLTreeActual = new AVL();
-        //static private AVL ClassAVLTree1 = new AVL();
-        //static private AVL ClassAVLTree2 = new AVL();
-        //static private AVL ClassAVLTree3 = new AVL();
-        //static private AVL ClassAVLTree4 = new AVL();
-        //static private AVL ClassAVLTree5 = new AVL();
-        //static private AVL ClassAVLTree6 = new AVL();
-
-
-        static public List<GeometryGraph> MainTree = new List<GeometryGraph>();
+        static public List<GeometryGraph> MainTree =  new List<GeometryGraph>();
         static public List<AVL> listClassAVLTree = new List<AVL>();
         static public GeometryGraph MainTreeFirst = new GeometryGraph();
         static public AVL listClassAVLTreeFirst = new AVL();
@@ -65,66 +52,82 @@ namespace AVLTree
         public MainForm()
         {
             InitializeComponent();
-
-            //MainTree.Add(new GeometryGraph());
-            //listClassAVLTree.Add(new AVL());
-
-            ////for (int i = 0; i < listClassAVLTree.Count; i++)
-            //{
-            //    Add(firstNumber, listClassAVLTree[0]);
-            //    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-            //    Add(firstNumber, listClassAVLTreeFirst);
-            //    ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
-            //}
         }
 
         private void buttonAddNode_Click(object sender, EventArgs e)
         {
-
-            //panelDrawTree1.Visible = true;
-
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-
-            if (firstStart == false)
+            if (int.TryParse(textBoxAddNode.Text, out int val))
             {
-                Add(Number, listClassAVLTreeFirst);
-                ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+                
+                MainTree.Add(new GeometryGraph());
+                listClassAVLTree.Add(new AVL());
+                ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
+
+                GeometryGraph MainTreeMain = MainTree[0];
+                AVL listClassAVLTreeMain = listClassAVLTree[0];
+  
+                MainTree = new List<GeometryGraph>();
+                listClassAVLTree = new List<AVL>();
+
+                MainTree.Add(new GeometryGraph());
+                listClassAVLTree.Add(new AVL());
+
+                listClassAVLTree[0] = listClassAVLTreeMain;
+                MainTree[0] = MainTreeMain;
+                
+
+
+                Add(val, listClassAVLTree[0]);
+                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+
+                panelDrawTree1.Visible = true;
+
+                textBoxAddNode.Text = "";
+                panelDrawTree1.Refresh();
+                firstStart = false;
             }
-
-            GeometryGraph MainTreeMain = MainTree[0];
-            AVL listClassAVLTreeMain = listClassAVLTree[0];
-
-            MainTree = new List<GeometryGraph>();
-            listClassAVLTree = new List<AVL>();
-
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-
-            listClassAVLTree[0] = listClassAVLTreeMain;
-            MainTree[0] = MainTreeMain;
-
-            if (textBoxAddNode.Text != "")
+            else
             {
-                //for (int i = 0; i < listClassAVLTree.Count; i++)
+                MessageBox.Show("Вы ввели неверное значение","Error");
+                textBoxAddNode.Text = "";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBoxDeleteNode.Text != "")
+            {
+                MainTree.Add(new GeometryGraph());
+                listClassAVLTree.Add(new AVL());
+
+                if (firstStart == false)
                 {
-
-                    Add(int.Parse(textBoxAddNode.Text), listClassAVLTree[0]);
-                    Number = int.Parse(textBoxAddNode.Text);
-                    //Add(firstNumber, listClassAVLTree[i]);
-                    ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-
-                    //Add(Number, listClassAVLTreeFirst);
-                    //ConnectTreeAndDraw(listClassAVLTreeFirst, MainTreeFirst);
+                    ConnectTreeAndDraw(listClassAVLTree[0], MainTreeFirst);
                 }
 
-            }
-            panelDrawTree1.Visible = true;
+                GeometryGraph MainTreeMain = MainTree[0];
+                AVL listClassAVLTreeMain = listClassAVLTree[0];
+
+                MainTree = new List<GeometryGraph>();
+                listClassAVLTree = new List<AVL>();
+
+                MainTree.Add(new GeometryGraph());
+                listClassAVLTree.Add(new AVL());
+
+                listClassAVLTree[0] = listClassAVLTreeMain;
+                MainTree[0] = MainTreeMain;
+
             
-            textBoxAddNode.Text = "";
-            //ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-            panelDrawTree1.Refresh();
-            firstStart = false;
+                Delete(int.Parse(textBoxDeleteNode.Text), listClassAVLTree[0]);
+                //addNumber = int.Parse(textBoxDeleteNode.Text);
+                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
+            
+                panelDrawTree1.Visible = true;
+
+                textBoxDeleteNode.Text = "";
+                panelDrawTree1.Refresh();
+                firstStart = false;
+            }
         }
 
         private void ConnectTreeAndDraw(AVL ClassTree, GeometryGraph Tree)
@@ -188,44 +191,7 @@ namespace AVLTree
 
             }
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Tree1.Edges.Clear();
-            //DrawHelpers.ClearNode(Tree1);
-            //if (textBoxDeleteNode.Text != "")
-            //{
-            //    Delete(int.Parse(textBoxDeleteNode.Text), ClassAVLTree1);
-            //    Delete(int.Parse(textBoxDeleteNode.Text), ClassAVLTree2);
-            //    Delete(int.Parse(textBoxDeleteNode.Text), ClassAVLTree3);
-            //}
-            ////ClassAVLTree.DisplayTree();
-            ////AVLTree = null;
-            ////Очистим панель с графическим представлением дерева
-            //panelDrawTree1.CreateGraphics();
-            //textBoxDeleteNode.Text = "";
-            ////Перерисуем панель, где отображается дерево
-            //DisplayTreeDraw(ClassAVLTree1, panelDrawTree1, Tree1);
-            //panelDrawTree1.Refresh();
-
-            GeometryGraph MainTreeMain = MainTree[0];
-            AVL listClassAVLTreeMain = listClassAVLTree[0];
-
-
-            MainTree = new List<GeometryGraph>();
-            listClassAVLTree = new List<AVL>();
-            MainTree.Add(new GeometryGraph());
-            listClassAVLTree.Add(new AVL());
-            listClassAVLTree[0] = listClassAVLTreeMain;
-            MainTree[0] = MainTreeMain;
-
-            if (textBoxDeleteNode.Text != "")
-            {
-                Delete(int.Parse(textBoxDeleteNode.Text), listClassAVLTree[0]);
-                ConnectTreeAndDraw(listClassAVLTree[0], MainTree[0]);
-            }
-            textBoxDeleteNode.Text = "";
-            panelDrawTree1.Refresh();
-        }
+       
 
 
 
@@ -373,16 +339,15 @@ namespace AVLTree
         {
             if (Find(key, avltree.root).data == key)
             {
-                //Console.WriteLine("{0} was found!", key);
+                Console.WriteLine("{0} was found!", key);
             }
             else
             {
-                //Console.WriteLine("Nothing found!");
+                Console.WriteLine("Nothing found!");
             }
         }
         private NodeTree Find(int target, NodeTree current)
         {
-
             if (target < current.data)
             {
                 if (target == current.data)
@@ -399,7 +364,10 @@ namespace AVLTree
                     return current;
                 }
                 else
+                {
                     return Find(target, current.right);
+                }
+                    
             }
 
         }
@@ -544,6 +512,7 @@ namespace AVLTree
         }
         private void panelDrawTree_Paint(object sender, PaintEventArgs e)
         {
+
             if (firstStart == false)
             {
                 e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
@@ -563,39 +532,64 @@ namespace AVLTree
 
         private void buttonTestCase_Click(object sender, EventArgs e)
         {
-            //for (int i = 0; i < aaraytestCase.Length; i++)
-            //{
-            //    textBoxAddNode.Text = (aaraytestCase[i]).ToString();
-            //    buttonAddNode_Click(null, null);
-            //    textBoxAddNode.Text = "";
-            //}
-
-            using (StreamReader sr = new StreamReader("file.txt"))
+            for (int i = 0; i < aaraytestCase.Length; i++)
             {
-                string numbers = sr.ReadLine();
-                foreach (var number in numbers.Split())
-                {
-                    if (int.TryParse(number, out int val))
-                    {
-                        numberFromFile.Add(int.Parse(number));
-                    }
-                    
-                }
-            }
-            foreach (var number in numberFromFile)
-            {
-                Console.WriteLine(number);
-                textBoxAddNode.Text = (number).ToString();
+                textBoxAddNode.Text = (aaraytestCase[i]).ToString();
                 buttonAddNode_Click(null, null);
                 textBoxAddNode.Text = "";
             }
+
+            //using (StreamReader sr = new StreamReader("file.txt"))
+            //{
+            //    string numbers = sr.ReadLine();
+            //    foreach (var number in numbers.Split())
+            //    {
+            //        if (int.TryParse(number, out int val))
+            //        {
+            //            numberFromFile.Add(int.Parse(number));
+            //        }
+                    
+            //    }
+            //}
+            //foreach (var number in numberFromFile)
+            //{
+            //    Console.WriteLine(number);
+            //    textBoxAddNode.Text = (number).ToString();
+            //    buttonAddNode_Click(null, null);
+            //    textBoxAddNode.Text = "";
+            //}
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            panelDrawTree1.Refresh();
-
+            //panelDrawTree1.Refresh();
+            if (int.TryParse(textBoxAddNode.Text, out int val))
+            {
+                Find(val, listClassAVLTree[0]);
+                {
+                    //MessageBox.Show("Данное значение уже есть в дереве!", "Error");
+                    //textBoxAddNode.Text = "";
+                    //return;
+                }
+            }
         }
+
+        private void radioButtonSpeed1_CheckedChanged(object sender, EventArgs e)
+        {
+            speedDraw = 1000;
+        }
+
+        private void radioButtonSpeed2_CheckedChanged(object sender, EventArgs e)
+        {
+            speedDraw = 500;
+        }
+
+        private void radioButtonSpeed3_CheckedChanged(object sender, EventArgs e)
+        {
+            speedDraw = 100;
+        }
+
+
     }
 }
