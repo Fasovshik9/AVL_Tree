@@ -35,11 +35,11 @@
             this.panelDrawTree1 = new System.Windows.Forms.Panel();
             this.buttonTestCase = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.radioButtonSpeed3 = new System.Windows.Forms.RadioButton();
             this.radioButtonSpeed2 = new System.Windows.Forms.RadioButton();
             this.radioButtonSpeed1 = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +49,7 @@
             this.buttonAddNode.Name = "buttonAddNode";
             this.buttonAddNode.Size = new System.Drawing.Size(119, 23);
             this.buttonAddNode.TabIndex = 0;
-            this.buttonAddNode.Text = "Добавить элемент";
+            this.buttonAddNode.Text = "Вставить элемент";
             this.buttonAddNode.UseVisualStyleBackColor = true;
             this.buttonAddNode.Click += new System.EventHandler(this.buttonAddNode_Click);
             // 
@@ -97,7 +97,7 @@
             this.buttonTestCase.Name = "buttonTestCase";
             this.buttonTestCase.Size = new System.Drawing.Size(128, 23);
             this.buttonTestCase.TabIndex = 5;
-            this.buttonTestCase.Text = "Добавить из файла";
+            this.buttonTestCase.Text = "Вставить из файла";
             this.buttonTestCase.UseVisualStyleBackColor = true;
             this.buttonTestCase.Click += new System.EventHandler(this.buttonTestCase_Click);
             // 
@@ -118,10 +118,19 @@
             this.panel1.Size = new System.Drawing.Size(1181, 100);
             this.panel1.TabIndex = 6;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(723, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Скорость отображения дерева";
+            // 
             // radioButtonSpeed3
             // 
             this.radioButtonSpeed3.AutoSize = true;
-            this.radioButtonSpeed3.Location = new System.Drawing.Point(760, 75);
+            this.radioButtonSpeed3.Location = new System.Drawing.Point(758, 63);
             this.radioButtonSpeed3.Name = "radioButtonSpeed3";
             this.radioButtonSpeed3.Size = new System.Drawing.Size(76, 17);
             this.radioButtonSpeed3.TabIndex = 9;
@@ -133,7 +142,7 @@
             // 
             this.radioButtonSpeed2.AutoSize = true;
             this.radioButtonSpeed2.Checked = true;
-            this.radioButtonSpeed2.Location = new System.Drawing.Point(760, 52);
+            this.radioButtonSpeed2.Location = new System.Drawing.Point(758, 40);
             this.radioButtonSpeed2.Name = "radioButtonSpeed2";
             this.radioButtonSpeed2.Size = new System.Drawing.Size(83, 17);
             this.radioButtonSpeed2.TabIndex = 8;
@@ -145,7 +154,7 @@
             // radioButtonSpeed1
             // 
             this.radioButtonSpeed1.AutoSize = true;
-            this.radioButtonSpeed1.Location = new System.Drawing.Point(760, 30);
+            this.radioButtonSpeed1.Location = new System.Drawing.Point(758, 18);
             this.radioButtonSpeed1.Name = "radioButtonSpeed1";
             this.radioButtonSpeed1.Size = new System.Drawing.Size(63, 17);
             this.radioButtonSpeed1.TabIndex = 7;
@@ -162,15 +171,6 @@
             this.button1.Text = "Отобразить повторно";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(727, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Скорость отображения дерева";
             // 
             // MainForm
             // 

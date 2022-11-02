@@ -7,23 +7,23 @@ using Point = Microsoft.Msagl.Core.Geometry.Point;
 
 namespace AVLTree
 {
-    class DrawHelpers
+    class MainDraw
     {
-        //Отрисовка графа в пределах размеров области clientRectangle элемента управления
-        //на основе данных из объекта geometryGraph MSAGL на поверхности рисования graphics элемента управления
-        public static void DrawFromGraph(Rectangle clientRectangle, GeometryGraph geometryGraph, Graphics graphics)
+        //Отрисовка дерева в пределах размеров области clientRectangle элемента управления
+        //на основе данных из объекта geometryTree MSAGL на поверхности рисования graphics элемента управления
+        public static void DrawFromTree(Rectangle clientRectangle, GeometryGraph geometryGraph, Graphics graphics)
         {
-            //Подготовка трансформации графа под область для отрисовки
-            SetGraphTransform(geometryGraph, clientRectangle, graphics);
+            //Подготовка трансформации дерева под область для отрисовки
+            SetTreeTransform(geometryGraph, clientRectangle, graphics);
             //Инициализируем инструмент рисования
             var pen = new Pen(Brushes.Black);
-            //Нарисуем вершины графа
+            //Нарисуем вершины дерева
             DrawNodes(geometryGraph, pen, graphics);
-            //Нарисуем рёбра графа
+            //Нарисуем рёбра дерева
             DrawEdges(geometryGraph, pen, graphics);
         }
 
-        public static void SetGraphTransform(GeometryGraph geometryGraph, Rectangle rectangle, Graphics graphics)
+        public static void SetTreeTransform(GeometryGraph geometryGraph, Rectangle rectangle, Graphics graphics)
         {
             RectangleF clientRectangle = rectangle;
             var gr = geometryGraph.BoundingBox;

@@ -22,13 +22,13 @@ namespace AVLTree
         //ALL
         //static public int[] aaraytestCase = new int[] { 4, 5, 51, 52, 1, 0, 6, 7, 8, 9 };
         //LR
-        static public int[] aaraytestCase = new int[] {50, 4, 5 };
+        //static public int[] aaraytestCase = new int[] {50, 4, 5 };
         //RL
         //static public int[] aaraytestCase = new int[] {50, 60, 55};
         //RR
         //static public int[] aaraytestCase = new int[] {50, 55, 60 };
         //LL
-        //static public int[] aaraytestCase = new int[] {50, 40, 45  };
+        static public int[] aaraytestCase = new int[] {50, 40, 45  };
    
 
         static private double radius = 10;
@@ -172,7 +172,7 @@ namespace AVLTree
             {
                 DrawNode(current.right, treeA);
                 DrawNode(current.left, treeA);
-                DrawHelpers.AddNode(current.data.ToString(), treeA, radius);
+                MainDraw.AddNode(current.data.ToString(), treeA, radius);
             }
         }
         private void DrawNodeConnections(NodeTree current, GeometryGraph treeA)
@@ -507,17 +507,17 @@ namespace AVLTree
 
         public class AVL
         {
-            public class NodeTree
+            public class NodeTree           //узел АВЛ-дерева
             {
-                public int data;
-                public NodeTree left;
-                public NodeTree right;
+                public int data;            //данные хранящиеся а узле
+                public NodeTree left;       //левый сосед узла
+                public NodeTree right;      //правый сосед узла
                 public NodeTree(int data)
                 {
                     this.data = data;
                 }
             }
-            public NodeTree root;
+            public NodeTree root;           //корень
 
 
             public AVL()
@@ -532,7 +532,7 @@ namespace AVLTree
             if (firstStart == false)
             {
                 e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-                if (MainTreeFirst != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTreeFirst, e.Graphics);
+                if (MainTreeFirst != null) MainDraw.DrawFromTree(panelDrawTree1.ClientRectangle, MainTreeFirst, e.Graphics);
                 System.Threading.Thread.Sleep(speedDraw);
             }
 
@@ -540,7 +540,7 @@ namespace AVLTree
             for (int i = listClassAVLTree.Count - 1; i > -1; i--)
             {
                 e.Graphics.DrawRectangle(new Pen(Color.White, this.Height / 1), 0, 1, this.Width, this.Height / 1);
-                if (MainTree[i] != null) DrawHelpers.DrawFromGraph(panelDrawTree1.ClientRectangle, MainTree[i], e.Graphics);
+                if (MainTree[i] != null) MainDraw.DrawFromTree(panelDrawTree1.ClientRectangle, MainTree[i], e.Graphics);
                 System.Threading.Thread.Sleep(speedDraw);
             }
 
@@ -548,32 +548,32 @@ namespace AVLTree
 
         private void buttonTestCase_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < aaraytestCase.Length; i++)
-            {
-                textBoxAddNode.Text = (aaraytestCase[i]).ToString();
-                buttonAddNode_Click(null, null);
-                textBoxAddNode.Text = "";
-            }
-
-            //using (StreamReader sr = new StreamReader("file.txt"))
+            //for (int i = 0; i < aaraytestCase.Length; i++)
             //{
-            //    string numbers = sr.ReadLine();
-            //    foreach (var number in numbers.Split())
-            //    {
-            //        if (int.TryParse(number, out int val))
-            //        {
-            //            numberFromFile.Add(int.Parse(number));
-            //        }
-                    
-            //    }
-            //}
-            //foreach (var number in numberFromFile)
-            //{
-            //    Console.WriteLine(number);
-            //    textBoxAddNode.Text = (number).ToString();
+            //    textBoxAddNode.Text = (aaraytestCase[i]).ToString();
             //    buttonAddNode_Click(null, null);
             //    textBoxAddNode.Text = "";
             //}
+
+            using (StreamReader sr = new StreamReader("file.txt"))  //считываем данные из файла
+            {
+                string numbers = sr.ReadLine();     //присваевываем построчно данные из файла в переменную
+                foreach (var number in numbers.Split()) //разделяем числа по пробелам
+                {
+                    if (int.TryParse(number, out int val))  //проверяем число ли данное значение
+                    {
+                        numberFromFile.Add(int.Parse(number));  //добавляем число в список
+                    }
+
+                }
+            }
+            foreach (var number in numberFromFile)  //проходим весь список с элементами
+            {
+                Console.WriteLine(number);
+                textBoxAddNode.Text = (number).ToString();  //записываем каждое число в поле для вставки элемента
+                buttonAddNode_Click(null, null);      //нажимаем кнопку для вставки элемента
+                textBoxAddNode.Text = "";   //очищаем поле для вставки
+            }
 
         }
 
